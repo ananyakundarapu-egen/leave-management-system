@@ -1,0 +1,67 @@
+.approve-btn {
+  background: #2ca24c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.approve-btn:hover {
+  background: #218838;
+}
+
+.reject-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.reject-btn:hover {
+  background: #c9302c;
+}
+.disabled-row {
+  opacity: 0.6;
+  background-color: #f5f5f5;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+}
+.top-bar {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 20px auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  padding: 8px 12px;
+  width: 260px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #2ca24c;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}

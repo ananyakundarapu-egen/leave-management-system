@@ -1,0 +1,99 @@
+<div class="employee-container">
+
+  <h2 class="title">Leave Requests</h2>
+
+  <div *ngIf="leaves === null" class="no-data">
+    Loading leave requests...
+  </div>
+
+  <div *ngIf="leaves && leaves.length === 0" class="no-data">
+    No leave requests found
+  </div>
+
+
+  <div class="top-bar" *ngIf="leaves && leaves.length > 0">
+  <input 
+    type="text"
+    placeholder="Search by Employee ID or Leave ID..."
+    [(ngModel)]="searchText"
+    class="search-input"
+  />
+  <select [(ngModel)]="selectedType" class="filter-select">
+    <option value="">All Types</option>
+    <option *ngFor="let type of leaveTypes" [value]="type">
+      {{ type }}
+    </option>
+  </select>
+</div>
+
+
+  <div class="table-card" *ngIf="leaves && leaves.length > 0">
+
+    <table class="leave-table">
+
+      <thead>
+        <tr>
+          <th>Emp Id</th>
+          <th>Leave Id</th>
+          <th>Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let leave of filteredLeaves()"
+    [class.disabled-row]="isActionDisabled(leave)">
+
+          <td>{{ leave.employee_id }}</td>
+
+          <td>{{ leave.leave_id | slice:0:9 }}</td>
+
+          <td>{{ leave.leave_type }}</td>
+
+          <td>{{ leave.start_date | date:'dd-MM-yyyy' }}</td>
+
+          <td>{{ leave.end_date | date:'dd-MM-yyyy' }}</td>
+
+          <td>{{ leave.reason }}</td>
+
+          <td>
+            <span class="status pending" *ngIf="leave.status === 'Pending'">
+              ⏳ Pending
+            </span>
+
+            <span class="status approved" *ngIf="leave.status === 'Approved'">
+              ✔ Approved
+            </span>
+
+            <span class="status rejected" *ngIf="leave.status === 'Rejected'">
+              ✖ Rejected
+            </span>
+          </td>
+
+         <td>
+ <button 
+  class="approve-btn"
+  (click)="approve(leave.leave_id)"
+  [disabled]="isActionDisabled(leave)">
+  ✔ Approve
+</button>
+
+<button 
+  class="reject-btn"
+  (click)="reject(leave.leave_id)"
+  [disabled]="isActionDisabled(leave)">
+  ✖ Reject
+</button>
+</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

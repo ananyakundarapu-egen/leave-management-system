@@ -1,0 +1,49 @@
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.popup-box {
+  background: white;
+  width: 340px;
+  padding: 28px 24px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: scaleIn .2s ease;
+}
+
+.icon {
+  font-size: 42px;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin: 6px 0 8px;
+  font-weight: 600;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.ok-btn {
+  background: #4338ca;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

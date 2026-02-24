@@ -1,0 +1,13 @@
+<div class="popup-backdrop" *ngIf="open" (click)="backdropClick()">
+  <div class="popup-box" (click)="$event.stopPropagation()">
+
+    <h2>Confirm</h2>
+    <p>{{ message }}</p>
+
+    <div class="actions">
+      <button class="no-btn" (click)="cancel()">No</button>
+        <button class="yes-btn" (click)="confirm()">Yes</button>
+    </div>
+
+  </div>
+</div>

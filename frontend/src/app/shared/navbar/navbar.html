@@ -1,0 +1,20 @@
+<div class="navbar">
+
+<div class="welcome">
+  <span class="brand" *ngIf="!isLoggedIn()">
+    <i class="fa-solid fa-users brand-icon"></i>
+    Leave Management System
+  </span>
+  <span class="brand" *ngIf="isLoggedIn()">
+    <i class="fa-solid fa-users brand-icon"></i>
+    Welcome {{ username }}
+  </span>
+
+</div>
+
+  <div class="nav-links" *ngIf="isLoggedIn()">
+    <span class="nav-item logout" (click)="logout()">
+      Logout
+    </span>
+  </div>
+</div>

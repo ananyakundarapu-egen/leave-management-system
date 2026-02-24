@@ -1,0 +1,75 @@
+<div class="backdrop" *ngIf="isOpen" (click)="onBackdropClick($event)">
+    <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Apply For Leaves</h3>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+
+<form #leaveForm="ngForm" (ngSubmit)="submitLeave(leaveForm); $event.preventDefault()">
+  <label>Leave Type</label>
+  <select name="type"
+          [(ngModel)]="form.type"
+          #type="ngModel"
+          required>
+    <option value="">Select type</option>
+    <option>Parental</option>
+    <option>Sick</option>
+    <option>Paid</option>
+    <option>Casual</option>
+    <option>Earned</option>
+  </select>
+
+ <p class="validation-error" *ngIf="(submitted || type.touched) && type.invalid">
+  Please select leave type
+</p>
+
+  <label>Start Date</label>
+  <input type="date"
+         name="start_date"
+         [(ngModel)]="form.start_date"
+         #start="ngModel"
+         [min]="today"
+         (change)="onStartDateChange()"
+         required>
+
+ <p class="validation-error" *ngIf="(submitted || start.touched) && start.invalid">
+  Please choose a start date
+</p>
+
+  <label>End Date</label>
+  <input type="date"
+         name="end_date"
+         [(ngModel)]="form.end_date"
+         #end="ngModel"
+         [min]="minEndDate"
+         required>
+<p class="validation-error" *ngIf="(submitted || end.touched) && end.errors?.['required']">
+  Please choose an end date
+</p>
+
+  <label>Reason</label>
+  <textarea name="reason"
+            [(ngModel)]="form.reason"
+            #reason="ngModel"
+            minlength="10"
+            required></textarea>
+
+<p class="validation-error" *ngIf="(submitted || reason.touched) && reason.errors?.['required']">
+  Reason is required
+</p>
+
+<p class="validation-error" *ngIf="(submitted || reason.touched) && reason.errors?.['minlength']">
+  Reason must be at least 10 characters
+</p>
+
+<p class="validation-error server-error" *ngIf="serverError">
+  {{ serverError }}
+</p>
+
+<button type="submit">
+  Submit Leave
+</button>
+
+</form>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+
+    <p class="subtitle">Create your employee account</p>
+    <h2 class="title">Sign up</h2>
+
+    <input
+      type="text"
+      placeholder="First name"
+      [(ngModel)]="firstName"
+      (blur)="firstNameTouched = true"
+      class="input-field"
+    />
+    <p class="validation-error" *ngIf="firstNameTouched && !firstName">
+      First name is required
+    </p>
+
+    <input
+      type="text"
+      placeholder="Last name"
+      [(ngModel)]="lastName"
+      (blur)="lastNameTouched = true"
+      class="input-field"
+    />
+    <p class="validation-error" *ngIf="lastNameTouched && !lastName">
+      Last name is required
+    </p>
+
+    <input
+  type="text"
+  placeholder="Employee ID (e.g. EMP001)"
+  [(ngModel)]="empId"
+  #empIdModel="ngModel"
+  required
+  pattern="^EMP[0-9]+$"
+  class="input-field"
+/>
+
+<p class="validation-error" *ngIf="empIdModel.touched && empIdModel.errors?.['required']">
+  Employee ID is required
+</p>
+
+<p class="validation-error" *ngIf="empIdModel.touched && empIdModel.errors?.['pattern']">
+  Employee ID must start with EMP followed by numbers (e.g. EMP001)
+</p>
+
+<p class="validation-error" *ngIf="empIdExistsError">
+  {{ empIdExistsError }}
+</p>
+
+    <input
+      type="email"
+      placeholder="Email address"
+      [(ngModel)]="email"
+      (blur)="emailTouched = true"
+      class="input-field"
+    />
+    <p class="validation-error" *ngIf="emailTouched && !email">
+      Email is required
+    </p>
+    <p class="validation-error" *ngIf="emailExistsError">
+  {{ emailExistsError }}
+</p>
+
+    <div class="password-wrapper">
+
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    placeholder="Password"
+    [(ngModel)]="password"
+    (blur)="passwordTouched = true"
+    class="input-field password-input"
+  />
+
+  <span class="toggle-password" (click)="togglePassword()">
+    <i class="material-icons">
+      {{ showPassword ? 'visibility_off' : 'visibility' }}
+    </i>
+  </span>
+
+</div>
+
+<p class="validation-error" *ngIf="passwordTouched && !password">
+  Password is required
+</p>
+
+<div class="password-wrapper">
+
+  <input
+    [type]="showConfirmPassword ? 'text' : 'password'"
+    placeholder="Confirm password"
+    [(ngModel)]="confirmPassword"
+    (blur)="confirmPasswordTouched = true"
+    class="input-field password-input"
+  />
+
+  <span class="toggle-password" (click)="toggleConfirmPassword()">
+    <i class="material-icons">
+      {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+    </i>
+  </span>
+
+</div>
+
+<p class="validation-error" *ngIf="confirmPasswordTouched && password !== confirmPassword">
+  Passwords do not match
+</p>
+
+    <button
+      class="login-btn"
+      (click)="signup()"
+      [disabled]="!isFormValid()"
+    >
+      Sign up
+    </button>
+
+    <p class="signup-text">
+      Already have an account?
+      <a routerLink="/login" class="signup-link">Login</a>
+    </p>
+
+  </div>
+
+</div>

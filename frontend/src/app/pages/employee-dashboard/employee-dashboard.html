@@ -1,0 +1,107 @@
+<div class="employee-container">
+
+  <div class="header-row">
+    <button class="apply-btn" (click)="openApplyLeave()">
+    <i class="fa-solid fa-plus"></i>Apply Leave
+    </button>
+  </div>
+
+  <h2 class="title">Leave History</h2>
+  <div class="leave-total" *ngIf="leaves !== null">
+  Total Leaves: {{ leaves.length }}
+</div>
+
+  <div class="table-card">
+    <table class="leave-table">
+
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+ <tbody>
+
+    <tr *ngIf="leaves === null">
+    <td colspan="7" class="no-data">
+      Loading leaves...
+    </td>
+  </tr>
+
+  <tr *ngIf="leaves !== null && leaves.length === 0">
+    <td colspan="7" class="no-data">
+      No leaves yet
+    </td>
+  </tr>
+
+  <ng-container *ngIf="leaves !== null">
+    <tr *ngFor="let leave of leaves"
+    [class.disabled-row]="isLeaveStarted(leave)">
+      <td>{{ leave.leave_id | slice:0:9 }}</td>
+      <td>{{ leave.leave_type }}</td>
+      <td>{{ leave.start_date | date:'dd-MM-yyyy' }}</td>
+      <td>{{ leave.end_date | date:'dd-MM-yyyy' }}</td>
+      <td>{{ leave.reason }}</td>
+
+      <td>
+        <span class="status pending" *ngIf="leave.status === 'Pending'">
+          ⏳ Pending
+        </span>
+
+        <span class="status approved" *ngIf="leave.status === 'Approved'">
+          ✔ Approved
+        </span>
+
+        <span class="status rejected" *ngIf="leave.status === 'Rejected'">
+          ✖ Rejected
+        </span>
+      </td>
+
+      <td class="action-buttons">
+
+  <button class="edit-btn"
+    (click)="editLeave(leave)"
+    [disabled]="leave.status !== 'Pending'">
+    <i class="fa-solid fa-pen"></i>Edit
+  </button>
+
+  <button class="withdraw-btn"
+    (click)="withdraw(leave)"
+    [disabled]="isLeaveStarted(leave) || leave.status !== 'Pending'">
+    <i class="fa-solid fa-trash"></i>Withdraw
+  </button>
+
+</td>
+    </tr>
+  </ng-container>
+
+</tbody>
+
+    </table>
+  </div>
+</div>
+<app-apply-leave
+  [isOpen]="showApplyModal"
+    [editData]="editingLeave"
+  (closed)="closeApplyLeave()"
+  (leaveCreated)="handleLeaveCreated()">
+</app-apply-leave>
+<app-success-popup
+  [open]="showSuccessPopup"
+  [message]="lastAction === 'edit' 
+    ? 'Leave edited successfully' 
+    : 'Leave applied successfully'"
+  (closed)="showSuccessPopup=false">
+</app-success-popup>
+<app-confirm-popup
+  [open]="showConfirmPopup"
+  message="Are you sure you want to withdraw this leave?"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()">
+</app-confirm-popup>

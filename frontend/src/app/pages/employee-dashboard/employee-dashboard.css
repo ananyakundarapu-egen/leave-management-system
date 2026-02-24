@@ -1,0 +1,127 @@
+.employee-container {
+  padding: 30px 60px;
+  background: #f4f6fb;
+  min-height: calc(100vh - 60px);
+}
+
+.header-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.apply-btn {
+  background: #4338ca;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.apply-btn:hover {
+  background: #081e47;
+}
+
+.title {
+  text-align: center;
+  margin: 10px 0 20px;
+  font-weight: 700;
+}
+
+.table-card {
+  display: flex;
+  justify-content: center;
+}
+
+.leave-table {
+  width: 80%;
+  border-collapse: collapse;
+  background: #dbe5f1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.leave-table th {
+  background: #b8c9e3;
+  padding: 10px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.leave-table td {
+  padding: 10px;
+  border-top: 1px solid #cfd9ea;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.pending {
+  color: #e6a400;
+}
+
+.approved {
+  color: #2ca24c;
+}
+
+.rejected {
+  color: #d9534f;
+}
+
+.withdraw-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.withdraw-btn:hover {
+  background: #c0392b;
+}
+.no-data {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #888;
+  font-style: italic;
+}
+
+.withdraw-btn:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+}
+.leave-total {
+  margin-bottom: 5px;
+  padding-left: 150px; 
+}
+.edit-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.edit-btn:hover {
+  background: #2c80b4;
+}
+
+.edit-btn:disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+}
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+button i {
+  margin-right: 6px;
+}

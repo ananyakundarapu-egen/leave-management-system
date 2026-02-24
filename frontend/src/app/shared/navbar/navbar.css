@@ -1,0 +1,58 @@
+.navbar {
+  background: black;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+  height: 65px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.welcome {
+  letter-spacing: 0.3px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.logout {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.25s, color 0.25s, transform 0.15s;
+}
+
+.nav-item.logout:hover {
+  color: #ff4d4f;
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+    padding-top: 3px;
+  width: 26px;
+  height: 26px;
+}
+
+.logo-icon path {
+  fill: #4338ca;
+}

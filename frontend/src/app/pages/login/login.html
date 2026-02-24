@@ -1,0 +1,56 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+   
+    <p class="subtitle">Please enter your details to login</p>
+    <h2 class="title">Welcome back</h2>
+<input
+  type="text"
+  placeholder="Email address"
+  [(ngModel)]="username"
+  (blur)="usernameTouched = true"
+  class="input-field"
+/>
+<p class="validation-error" *ngIf="usernameTouched && !username">
+  Username is required
+</p>
+
+<div class="password-wrapper">
+
+  <input
+    [type]="showPassword ? 'text' : 'password'"
+    placeholder="Password"
+    [(ngModel)]="password"
+    (blur)="passwordTouched = true"
+    class="input-field password-input"
+  />
+
+  <span class="toggle-password" (click)="togglePassword()">
+    <i class="material-icons">
+      {{ showPassword ? 'visibility_off' : 'visibility' }}
+    </i>
+  </span>
+
+</div>
+
+<p class="validation-error" *ngIf="passwordTouched && !password">
+  Password is required
+</p>
+
+<button
+  class="login-btn"
+  (click)="login()"
+  [disabled]="!isFormValid()"
+>
+  Sign in
+</button>
+<p class="validation-error" *ngIf="error">
+  {{ error }}
+</p>
+    <p class="signup-text">
+    Don’t have an account?
+    <a routerLink="/signup" class="signup-link">Sign up</a>
+    </p>
+  </div>
+
+</div>
