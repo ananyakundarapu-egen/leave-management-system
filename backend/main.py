@@ -5,19 +5,21 @@ from routes import router as leave_router
 from register import router as register_router
 
 app = FastAPI()
-app.include_router(register_router)
+
+origins = [
+    "http://localhost:4200",
+    "https://leave-frontend-371946530630.us-central1.run.app"
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:4200",
-        "https://leave-frontend-371946530630.us-central1.run.app"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
+app.include_router(register_router)
 app.include_router(auth_router)
 app.include_router(leave_router)
 
