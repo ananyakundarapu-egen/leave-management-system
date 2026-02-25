@@ -65,11 +65,11 @@
 
       <td class="action-buttons">
 
-  <button class="edit-btn"
-    (click)="editLeave(leave)"
-    [disabled]="leave.status !== 'Pending'">
-    <i class="fa-solid fa-pen"></i>Edit
-  </button>
+<button class="edit-btn"
+  (click)="editLeave(leave)"
+  [disabled]="leave.status !== 'Pending' || isLeaveStarted(leave)">
+  <i class="fa-solid fa-pen"></i>Edit
+</button>
 
   <button class="withdraw-btn"
     (click)="withdraw(leave)"

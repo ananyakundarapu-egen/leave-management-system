@@ -119,8 +119,22 @@ def update_leave_route(leave_id: str, leave: LeaveCreate, user=Depends(get_curre
     if user["role"] != "employee":
         raise HTTPException(status_code=403, detail="Employees only")
 
-    leave_dict = leave.dict()
+    existing_leave = get_leave_by_id(leave_id)
 
+    if not existing_leave:
+        raise HTTPException(status_code=404, detail="Leave not found")
+
+    leave_start = existing_leave["start_date"]
+    if isinstance(leave_start, str):
+        leave_start = datetime.strptime(leave_start, "%Y-%m-%d").date()
+
+    if leave_start < datetime.utcnow().date():
+        raise HTTPException(
+            status_code=400,
+            detail="Cannot edit leave that has already started"
+        )
+
+    leave_dict = leave.dict()
     user_record = get_user(user["username"])
     leave_dict["employee_id"] = user_record["employee_id"]
 
