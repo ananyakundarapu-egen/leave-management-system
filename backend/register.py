@@ -57,8 +57,8 @@ def register(data: FirebaseRegister, response: Response):
             key="session",
             value=access_token,
             httponly=True,
-            samesite="lax",
-            secure=False,
+            samesite="none",
+            secure=True,
             path="/"
         )
 
