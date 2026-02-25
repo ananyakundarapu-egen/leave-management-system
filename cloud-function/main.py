@@ -110,6 +110,7 @@ def notify_pending_leaves(request):
     JOIN `{USERS_TABLE}` u
     ON l.employee_id = u.employee_id
     WHERE l.status = 'Pending'
+    AND l.start_date >= CURRENT_DATE()
     """
 
     results = client.query(query).result()
