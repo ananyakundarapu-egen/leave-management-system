@@ -1,26 +1,16 @@
-# Stage 1: Build Angular app
 FROM node:20-alpine AS build
 
 WORKDIR /app
-
 COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build -- --configuration production
+RUN npm run build
 
-# Stage 2: Serve with nginx
 FROM nginx:alpine
 
-# Remove default nginx page
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy Angular build output (IMPORTANT: browser folder)
-COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html/
-
-# Copy nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
 
 EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "sed -i 's/listen 80;/listen ${PORT};/' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
