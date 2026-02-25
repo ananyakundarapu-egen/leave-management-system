@@ -18,26 +18,6 @@ from bigquery_db import (
 
 router = APIRouter()
 
-@router.post("/signup")
-def signup(data: dict):
-
-    email = data.get("email")
-    first_name = data.get("first_name")
-    last_name = data.get("last_name")
-    employee_id = data.get("employee_id")
-
-    result = insert_user_if_not_exists(
-        email,
-        first_name,
-        last_name,
-        employee_id
-    )
-
-    if "error" in result:
-        raise HTTPException(status_code=400, detail=result["error"])
-
-    return result
-
 @router.post("/apply-leave")
 def apply_leave(leave: LeaveCreate, user=Depends(get_current_user)):
     if user["role"] != "employee":
