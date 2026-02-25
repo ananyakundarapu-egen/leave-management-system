@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { auth } from '../../services/firebase';
 import { AuthService } from '../../services/auth';
 import { ChangeDetectorRef } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -39,7 +40,8 @@ export class SignupComponent {
     private router: Router,
     private http: HttpClient,
     private authService: AuthService,
-    private cd: ChangeDetectorRef 
+    private cd: ChangeDetectorRef,
+    private api = environment.apiUrl
   ) {}
 
   isFormValid(): boolean {
@@ -86,16 +88,17 @@ export class SignupComponent {
 
     const idToken = await userCredential.user.getIdToken();
 
-    this.http.post<any>(
-        '/api/register',
-      {
-        id_token: idToken,
-        first_name: this.firstName,
-        last_name: this.lastName,
-        employee_id: this.empId.trim()
-      },
-      { withCredentials: true }
-    )
+  this.http.post<any>(
+    `${this.api}/register`,
+    {
+      id_token: idToken,
+      first_name: this.firstName,
+      last_name: this.lastName,
+      employee_id: this.empId.trim()
+    },
+    { withCredentials: true }
+  )
+
 .subscribe({
   next: (res) => {
     this.authService.login(res.username, res.role);
