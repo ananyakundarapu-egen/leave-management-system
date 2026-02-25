@@ -52,7 +52,7 @@ export class LoginComponent {
       const idToken = await userCredential.user.getIdToken();
 
  this.http.post<any>(
-  '/api/login',
+`${environment.apiUrl}/login`,
   { id_token: idToken },
   { withCredentials: true }
 )
