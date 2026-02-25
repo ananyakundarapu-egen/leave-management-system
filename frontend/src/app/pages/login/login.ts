@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../../services/firebase';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
