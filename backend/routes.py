@@ -145,3 +145,10 @@ def update_leave_route(leave_id: str, leave: LeaveCreate, user=Depends(get_curre
     leave_dict["employee_id"] = user_record["employee_id"]
 
     return update_leave(leave_id, leave_dict)
+
+@router.get("/user-session")
+def user_session(user=Depends(get_current_user)):
+    return {
+        "username": user["username"],
+        "role": user["role"]
+    }
