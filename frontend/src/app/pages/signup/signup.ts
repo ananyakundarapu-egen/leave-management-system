@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment';
   styleUrl: '../login/login.css'
 })
 export class SignupComponent {
-
+  private api = environment.apiUrl
   firstName = '';
   lastName = '';
   email = '';
@@ -41,7 +41,6 @@ export class SignupComponent {
     private http: HttpClient,
     private authService: AuthService,
     private cd: ChangeDetectorRef,
-    private api = environment.apiUrl
   ) {}
 
   isFormValid(): boolean {
@@ -72,7 +71,7 @@ export class SignupComponent {
 }
 
  async signup() {
-
+  
   if (!this.isFormValid()) return;
 
   this.emailExistsError = '';
