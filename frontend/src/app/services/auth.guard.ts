@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth';
 import { map, catchError, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export const authGuard: CanActivateFn = () => {
 
@@ -10,15 +11,17 @@ export const authGuard: CanActivateFn = () => {
   const http = inject(HttpClient);
   const auth = inject(AuthService);
 
-return http.get<any>('/api/user-session', { withCredentials: true })
-    .pipe(
-      map(res => {
-        auth.login(res.username, res.role);
-        return true;
-      }),
-      catchError(() => {
-        router.navigate(['/login']);
-        return of(false);
-      })
-    );
+  return http.get<any>(
+    `${environment.apiUrl}/user-session`,
+    { withCredentials: true }
+  ).pipe(
+    map(res => {
+      auth.login(res.username, res.role);
+      return true;
+    }),
+    catchError(() => {
+      router.navigate(['/login']);
+      return of(false);
+    })
+  );
 };
